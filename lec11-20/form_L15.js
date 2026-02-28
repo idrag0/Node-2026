@@ -40,6 +40,18 @@ http.createServer((req, res) => {
             res.writeHead(201, { "Content-Type": "text/html" });
             res.write(data);
         } else if (req.url == "/submit") {
+
+            let databody = [];
+
+            req.on('data', (chunk)=>{
+                databody.push(chunk);
+            });
+
+            req.on('end', ()=>{
+                let rawData = Buffer.concat(databody).toString();
+                console.log(rawData);
+            });
+            
             res.write("<p> data submited guys</p>");
         }
 
