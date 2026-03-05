@@ -49,7 +49,6 @@ else if(operations == 'update'){
     const fileData = fs.readFileSync(path, "utf-8");
     console.log("data read from file : " + fileData);
 }
-
 else if(operations == 'delete'){
     const data = process.argv[3];
     const path = "./" + data + ".txt";      

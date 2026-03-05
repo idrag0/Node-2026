@@ -55,13 +55,16 @@ http.createServer((req, res) => {
                 let str  = "name : " + readable.name + " Email : " + readable.email + " Phone : " + readable.phone + " Country : " + readable.country + " Message : " + readable.message;
                 console.log(str);
 
-                // fs.writeFileSync(readable.name + ".txt", str);
+                // fs.writeFileSync(readable.name + ".txt", str);  // this will create a file with name of user and write the data in it
 
-                fs.writeFile("./data.txt", str + "\n", {flag: "a"}, (err) => {
+                // this will create a file named data.txt and append the data in it, if file already exist it will append the data in it
+                fs.writeFile("./data.txt", str + "\n", {flag: "a"}, (err) => {  
                     if(err){
                         console.log("error writing file");
                     }
                 })
+
+
 
                 console.log("data addedd to file");
             });

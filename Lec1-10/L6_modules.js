@@ -15,3 +15,10 @@ console.log("objects in nodejs are called modules");
 console.log(process.cwd());
 console.log(process.pid());
 
+
+const {log} = require('co')
+
+log("custom log");
+
+
+
