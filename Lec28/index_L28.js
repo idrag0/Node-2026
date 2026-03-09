@@ -1,9 +1,13 @@
 
 
+
 import express from 'express';
 import path from 'path';
 
 const app = express();
+
+// Serve static files from the view directory
+app.use(express.static(path.resolve('./view')));  // lec 29
 
 app.get('/', (req, res) =>{
     const abspath = path.resolve('./view/home.html');
@@ -21,7 +25,7 @@ app.get('/about', (req,res)=>{
     res.sendFile(abspath);      
 });
 
-app.use((req, res) => {
+app.use((req, res) => {    
     
     const abspaath = path.resolve('./view/404.html');
     res.status(404).sendFile(abspaath);
