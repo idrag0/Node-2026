@@ -11,6 +11,16 @@ app.set("view engine", "ejs");
 client.connect().then((connection)=>{
     const db = connection.db('college');
 
+    app.get('/', (req, res)=>{
+        res.send(`
+            <h1>Welcome to the REST API</h1>
+            <ul>
+                <li><a href="/api">Get Students Data (JSON)</a></li>
+                <li><a href="/ui">View Students Data (UI)</a></li>
+            </ul>
+        `);
+    })
+
     app.get('/api', async(req, res)=>{
         const collection = db.collection('users');
         const students = await collection.find().toArray();
