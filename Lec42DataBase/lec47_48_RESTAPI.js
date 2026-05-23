@@ -55,7 +55,7 @@ client.connect().then((connection)=>{
 
     app.post("/add-student", (req, res)=>{
 
-        console.log(req.body); // { name: '...', age: '...', city: '...' }
+        console.log(req.body); // { name: '... ', age: '...', city: '...' }
 
         const collection = db.collection('users');
         collection.insertOne(req.body);
@@ -64,7 +64,16 @@ client.connect().then((connection)=>{
 
         res.send('alert("Student added successfully")');
     })
+
+    app.delete("/delete/:id",(req, res)=>{
+        console.log(req.params.id);
+
+        res.send("working");
+    })
 })
+
+
+
 
 
 app.listen(8900, ()=>{
