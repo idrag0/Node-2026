@@ -2,8 +2,13 @@ import express from 'express';
 
 const app = express();
 
+function checkRouter(req, res, next){
+    console.log("user is acessing " + req.url + " page");
+    next();
+}
 
 
+app.use(checkRouter);
 
 app.get('/',(req,res)=>{
     res.write("Home page " );

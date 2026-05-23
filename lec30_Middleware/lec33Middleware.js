@@ -22,7 +22,7 @@ app.get("/login", (req, res) => {
 app.post('/submit', (req,res)=>{
   console.log(req.body); // { username: '...', password: '...' }
   res.send("Form submitted successfully");
-})
+});
 
 app.get("/submit", (req, res) => {
   res.send("submit page");
