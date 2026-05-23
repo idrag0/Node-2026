@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Update users</title>
 </head>
 <body>
     <h1>Data is fetched from MongoDB</h1>
@@ -13,13 +13,14 @@
             <th>Name</th>
             <th>Age</th>
             <th>City</th>
+            <th>Operations</th>
         </tr>
         <% results.forEach(student => {%>
             <tr>
                 <td><%= student.name %></td>
                 <td><%= student.age %></td>
                 <td><%= student.city %></td>
-                <td><%= student._id %></td>
+                <td><button onclick="location.href='/update-user/<%= student._id %>'">Delete</button></td>
             </tr>
         <%})%>
     </table>

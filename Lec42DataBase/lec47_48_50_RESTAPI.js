@@ -1,5 +1,5 @@
 import express from 'express';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 const app = express();
 
@@ -20,6 +20,7 @@ client.connect().then((connection)=>{
                 <li><a href="/api">Get Students Data (JSON)</a></li>
                 <li><a href="/ui">View Students Data (UI)</a></li>
                 <li><a href="/add">add student</a></li>
+                <li> <a href="/update-users">Data delete</a> </li>
             </ul>
         `);
     })
@@ -65,10 +66,58 @@ client.connect().then((connection)=>{
         res.send('alert("Student added successfully")');
     })
 
-    app.delete("/delete/:id",(req, res)=>{
-        console.log(req.params.id);
+    app.get("/update-users", async(req, res)=>{  // lec 50 last
 
-        res.send("working");
+        const collection = db.collection('users');
+        const results = await collection.find().toArray();
+        res.render("userDelete",{results:results}); 
+
+    })
+
+    app.get("/update-user/:id",async(req,res)=>{  // lec 50 last
+        const id = req.params.id;
+
+        console.log(id);
+
+        if(!ObjectId.isValid(id)){
+            return res.send({success:false, message : "Invalid Id"});
+        }
+
+        const collection = db.collection('users');
+
+        const result = await collection.deleteOne({_id:new ObjectId(id)});
+         
+        if(result.deletedCount > 0){
+            res.send("<h2>data deleted</h2>")
+        }else{
+            res.send("<h2> data not deleted , try again !</h2>")
+        }
+    })
+
+    app.delete("/delete/:id",async (req, res)=>{   // lec 50 mid
+
+        const id = req.params.id;
+
+        console.log(id);
+
+        if(!ObjectId.isValid(id)){
+            return res.send({success:false, message : "Invalid Id"});
+        }
+
+        const collection = db.collection('users');
+
+        const result = await collection.deleteOne({_id:new ObjectId(id)});
+         
+        if(result.deletedCount > 0){
+            res.send({
+                message : "data deleted",
+                success : true
+            })
+        }else{
+            res.send({message : "data not deleted , try after sometimes",
+                success : false
+            })
+        }
     })
 })
 
