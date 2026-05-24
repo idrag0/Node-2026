@@ -119,6 +119,38 @@ client.connect().then((connection)=>{
             })
         }
     })
+
+
+    app.get("/update/:id", async(req, res)=>{
+        const id = req.params.id;
+
+        console.log(id);
+
+        const collection = db.collection("users");
+        const result = await collection.findOne({_id: new ObjectId(id)});
+        res.render("update-users",{user:result});
+
+        
+    })
+
+    app.post('/update-users/:id', async(req, res)=>{
+        const id = req.params.id;
+        const body = req.body;
+
+        console.log(id);
+
+        const collection = db.collection("users");
+        
+
+    
+        const result = await collection.updateOne({_id : new ObjectId(id)}, {$set:body});
+
+        if(result){
+            res.send("<h2>data update</h2>");
+        }else{
+            res.send("<h2>data update</h2>");
+        }
+    })
 })
 
 

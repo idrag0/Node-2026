@@ -21,6 +21,7 @@
                 <td><%= student.age %></td>
                 <td><%= student.city %></td>
                 <td><button onclick="location.href='/update-user/<%= student._id %>'">Delete</button></td>
+                <td><button onclick ="location.href='/update/<%= student._id %>'">Update</button></td>
             </tr>
         <%})%>
     </table>
